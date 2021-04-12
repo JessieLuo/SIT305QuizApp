@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="answer_first">First answer</string>
+    <string name="answer_second">Second answer</string>
+    <string name="answer_third">Third answer</string>
+</resources>

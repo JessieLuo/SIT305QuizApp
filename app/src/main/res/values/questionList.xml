@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="question_first">First Question</string>
+    <string name="question_second">Second Question</string>
+    <string name="question_third">Third Question</string>
+    <string name="question_fourth">Fourth Question</string>
+    <string name="question_fifth">Fifth Question</string>
+</resources>

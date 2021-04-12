@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SIT305QuizApp</string>
+    <string name="question_declaration">Question details:</string>
+    <string name="question_show">This is question field</string>
+</resources>
