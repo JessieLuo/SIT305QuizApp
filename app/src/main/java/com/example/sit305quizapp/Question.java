@@ -82,7 +82,8 @@ public class Question extends AppCompatActivity implements View.OnClickListener 
         int userChoose = questionBank[currentQuestionIndex].getAnswerTrueIndex();
         if(answer_index == userChoose){
             count += 1;
-            //countText.setText(count);
+            countText = findViewById(R.id.countText);
+            Toast.makeText(Question.this, "Right Answer", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(Question.this, "Wrong answer", Toast.LENGTH_SHORT).show();
         }
