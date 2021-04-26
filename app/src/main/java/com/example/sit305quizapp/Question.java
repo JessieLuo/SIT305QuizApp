@@ -1,6 +1,5 @@
 package com.example.sit305quizapp;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -26,7 +25,7 @@ public class Question extends AppCompatActivity implements View.OnClickListener 
             new QuestionList(R.string.question_fifth, R.string.answer_second)
     };
 
-    private int count = 0;
+    private int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +33,10 @@ public class Question extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_question);
         //receive main activity name
         nameText = findViewById(R.id.nameText);
-        Intent intent2 = getIntent();
-        String name = intent2.getStringExtra("name");
+        Intent intent1 = getIntent();
+        String name = intent1.getStringExtra("name");
         nameText.setText("Welcome: " + name + " to SIT305 quiz");
+
         questionDetail = findViewById(R.id.questionDetail);
         questionDetail.setText(R.string.question_first);
 
@@ -64,11 +64,12 @@ public class Question extends AppCompatActivity implements View.OnClickListener 
                 checkAnswer(R.string.answer_third);
                 break;
             case R.id.submitButton:
-                currentQuestionIndex = (currentQuestionIndex + 1) % questionBank.length;
                 update();
-                if(currentQuestionIndex == questionBank.length - 1){
+                currentQuestionIndex += 1;
+                if(currentQuestionIndex == questionBank.length){
                     Intent intent2 = new Intent(this, Result.class);
-                    startActivityForResult(intent2, 2);
+                    intent2.putExtra("score", score);
+                    startActivityForResult(intent2, 1);
                 }
                 break;
         }
@@ -76,16 +77,19 @@ public class Question extends AppCompatActivity implements View.OnClickListener 
 
     private void update() {
         questionDetail.setText(questionBank[currentQuestionIndex].getQuestionIndex());
+        countText = findViewById(R.id.countText);
+        countText.setText(String.valueOf(score) + "/5");
     }
 
-    private void checkAnswer(int answer_index) {
-        int userChoose = questionBank[currentQuestionIndex].getAnswerTrueIndex();
-        if(answer_index == userChoose){
-            count += 1;
-            countText = findViewById(R.id.countText);
+    private void checkAnswer(int buttonId) {
+        int userChoose = buttonId;
+        if(questionBank[currentQuestionIndex].getAnswerTrueIndex() == userChoose){
+            score += 1;
             Toast.makeText(Question.this, "Right Answer", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(Question.this, "Wrong answer", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

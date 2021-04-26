@@ -1,5 +1,6 @@
 package com.example.sit305quizapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,9 +14,9 @@ public class MainActivity extends AppCompatActivity {
     Button startButton;
     EditText editNameTextView;
     public void jumpClick(View view){
-        Intent intent1 = new Intent(this, Question.class);
-        intent1.putExtra("name", editNameTextView.getText().toString());
-        startActivity(intent1);
+        Intent intent = new Intent(this, Question.class);
+        intent.putExtra("name", editNameTextView.getText().toString());
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -24,5 +25,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startButton = findViewById(R.id.startButton);
         editNameTextView = findViewById(R.id.editNameTextView);
+    }
+
+    //receive result activity data
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        finishActivity(2);
     }
 }
